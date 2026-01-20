@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVENT | Roppongi Lounge</title>
+
+<style>
+/* ===== Reset ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  font-family: "Helvetica Neue", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  color: #222;
+}
+
+/* ===== Hero Image ===== */
+.hero {
+  width: 100%;
+  height: 420px;
+  background-image: url("IMAGE_URL_HERE");
+  background-size: cover;
+  background-position: center;
+}
+
+/* ===== Layout ===== */
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+
+/* ===== Section Title ===== */
+.section-title {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: #888;
+  margin-bottom: 14px;
+}
+
+.section-title span {
+  display: inline-block;
+  width: 3px;
+  height: 14px;
+  background: #000;
+  margin-right: 12px;
+}
+
+/* ===== Sub Text ===== */
+.section-sub {
+  background: #fdecef;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+/* ===== Scroll Box ===== */
+.event-box {
+  height: 340px;
+  padding: 26px;
+  border-radius: 14px;
+  border: 1px solid #ddd;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* ===== Event Item ===== */
+.event {
+  padding-bottom: 26px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid #eee;
+}
+
+.event:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.event-date {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 6px;
+}
+
+.event-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.event-text {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #444;
+}
+
+/* ===== Scrollbar ===== */
+.event-box::-webkit-scrollbar {
+  width: 6px;
+}
+.event-box::-webkit-scrollbar-thumb {
+  background: #cfcfcf;
+  border-radius: 10px;
+}
+.event-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .hero {
+    height: 260px;
+  }
+
+  .event-box {
+    height: 300px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Hero -->
+<div class="hero"></div>
+
+<div class="wrapper">
+
+  <div class="section-title">
+    <span></span>EVENT
+  </div>
+
+  <div class="section-sub">
+    イベント情報はこちらから
+  </div>
+
+  <div class="event-box">
+
+    <div class="event">
+      <div class="event-date">2026.01.15 (Thu)</div>
+      <div class="event-title">SPECIAL LOUNGE NIGHT</div>
+      <div class="event-text">
+        六本木の夜を彩るスペシャルイベント。<br>
+        洗練されたラウンジ空間で特別なひとときを。
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="event-date">2026.01.16 (Fri)</div>
+      <div class="event-title">GUEST DJ EVENT</div>
+      <div class="event-text">
+        都内で活躍するゲストDJを迎えた一夜。<br>
+        心地よいサウンドと共にお楽しみください。
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="event-date">2026.01.20 (Tue)</div>
+      <div class="event-title">WEEKDAY LUXURY</div>
+      <div class="event-text">
+        平日限定の落ち着いた雰囲気。<br>
+        ゆったりとしたソファ席で大人の時間を。
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
