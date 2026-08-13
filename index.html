@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LE PIN | Roppongi Premium Lounge</title>
+<meta name="description" content="六本木 LE PIN — 大人のための極上ラウンジ。厳選されたシャンパン、クラフトカクテル、洗練された空間で特別な夜を。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black: #0a0808;
+    --black-2: #120e0e;
+    --black-3: #1a1414;
+    --red: #7a1420;
+    --red-bright: #b31d2d;
+    --gold: #c9a668;
+    --gold-soft: #e4cd9a;
+    --white: #f4efe6;
+    --white-dim: rgba(244,239,230,0.62);
+    --line: rgba(201,166,104,0.28);
+    --serif-en: 'Cinzel', serif;
+    --serif-en-2: 'Cormorant Garamond', serif;
+    --serif-jp: 'Noto Serif JP', serif;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--serif-jp);
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+  img{ max-width:100%; display:block; }
+
+  .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* ===== Ornament helpers ===== */
+  .eyebrow{
+    font-family: var(--serif-en);
+    letter-spacing: 0.35em;
+    font-size: 12px;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width: 26px; height: 1px;
+    background: var(--gold);
+    display:inline-block;
+  }
+
+  .rule{
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--red-bright) 55%, var(--gold) 80%, transparent);
+    opacity: 0.5;
+  }
+
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 34px;
+    font-family: var(--serif-en);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    border: 1px solid var(--gold);
+    color: var(--gold-soft);
+    background: transparent;
+    cursor: pointer;
+    transition: all .35s ease;
+    white-space: nowrap;
+  }
+  .btn:hover{ background: var(--gold); color: var(--black); }
+  .btn.solid{
+    background: linear-gradient(135deg, var(--red-bright), var(--red));
+    border-color: var(--red-bright);
+    color: var(--white);
+  }
+  .btn.solid:hover{ filter: brightness(1.15); background: linear-gradient(135deg, var(--red-bright), var(--red)); color: var(--white); }
+
+  /* ===== Header ===== */
+  header{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    background: rgba(10,8,8,0.72);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    transition: background .3s ease;
+  }
+  .brand{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--serif-en);
+    letter-spacing: 0.28em;
+    font-size: 17px;
+    color: var(--white);
+  }
+  .brand .pin-mark{ width: 22px; height: 22px; flex-shrink:0; }
+  .brand small{
+    display:block;
+    font-family: var(--serif-jp);
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    color: var(--white-dim);
+    margin-top: 2px;
+  }
+
+  #menu-toggle{ display:none; }
+  .menu-btn{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--serif-en);
+    letter-spacing: 0.25em;
+    font-size: 12px;
+    color: var(--gold-soft);
+    cursor: pointer;
+    padding: 10px 16px;
+    border: 1px solid var(--line);
+  }
+  .menu-btn .bars{ display:flex; flex-direction: column; gap:4px; }
+  .menu-btn .bars span{ width:18px; height:1px; background: var(--gold); display:block; transition: all .3s ease; }
+
+  .nav-overlay{
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,8,8,0.98), rgba(18,14,14,0.98));
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+  }
+  #menu-toggle:checked ~ .nav-overlay{ opacity: 1; pointer-events: all; }
+  .nav-overlay nav{
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    text-align: center;
+  }
+  .nav-overlay nav a{
+    font-family: var(--serif-en);
+    letter-spacing: 0.3em;
+    font-size: 20px;
+    color: var(--white);
+    position: relative;
+    padding-bottom: 6px;
+  }
+  .nav-overlay nav a span{
+    display:block;
+    font-family: var(--serif-jp);
+    letter-spacing: 0.25em;
+    font-size: 11px;
+    color: var(--gold);
+    margin-top: 6px;
+  }
+  .nav-overlay nav a:hover{ color: var(--gold-soft); }
+  .nav-close{
+    position: absolute;
+    top: 22px; right: 24px;
+    font-family: var(--serif-en);
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    cursor: pointer;
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 24px 80px;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(122,20,32,0.35), transparent 60%),
+      radial-gradient(ellipse at 20% 100%, rgba(201,166,104,0.10), transparent 55%),
+      linear-gradient(180deg, #0a0808 0%, #120d0d 60%, #0a0808 100%);
+    overflow: hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(201,166,104,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,166,104,0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at 50% 30%, black, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-mark{
+    width: 78px; height: 78px;
+    margin-bottom: 26px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero .eyebrow{ justify-content:center; margin-bottom: 22px; position: relative; z-index:1; }
+  .hero .eyebrow::before{ display:none; }
+  .hero .eyebrow::after{ content:""; width:26px; height:1px; background: var(--gold); display:inline-block; }
+
+  .hero h1{
+    font-family: var(--serif-en);
+    font-size: clamp(46px, 12vw, 92px);
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    background: linear-gradient(180deg, #fff 0%, var(--gold-soft) 60%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    z-index: 1;
+  }
+  .hero h2{
+    font-family: var(--serif-jp);
+    font-weight: 500;
+    font-size: clamp(15px, 3vw, 19px);
+    letter-spacing: 0.4em;
+    color: var(--white-dim);
+    margin: 18px 0 10px;
+    position: relative; z-index: 1;
+  }
+  .hero p.tagline{
+    font-family: var(--serif-en-2);
+    font-style: italic;
+    font-size: clamp(16px, 3vw, 20px);
+    color: var(--gold-soft);
+    margin: 6px 0 40px;
+    position: relative; z-index: 1;
+  }
+  .hero-actions{
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative; z-index: 1;
+  }
+  .scroll-cue{
+    margin-top: 64px;
+    font-family: var(--serif-en);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--white-dim);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative; z-index: 1;
+  }
+  .scroll-cue .line{
+    width: 1px; height: 40px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    animation: dropline 2.2s ease-in-out infinite;
+  }
+  @keyframes dropline{
+    0%{ transform: scaleY(0); transform-origin: top; }
+    50%{ transform: scaleY(1); transform-origin: top; }
+    51%{ transform: scaleY(1); transform-origin: bottom; }
+    100%{ transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  section{ position: relative; }
+
+  /* ===== Index / numbered links (Q&A / RADIO style) ===== */
+  .index-list{ border-top: 1px solid var(--line); }
+  .index-row{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 26px 24px;
+    border-bottom: 1px solid var(--line);
+    max-width: 1080px;
+    margin: 0 auto;
+    transition: background .3s ease;
+  }
+  .index-row:hover{ background: rgba(201,166,104,0.05); }
+  .index-row .num{
+    font-family: var(--serif-en);
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    width: 30px;
+    flex-shrink: 0;
+  }
+  .index-row .label{
+    flex: 1;
+    font-family: var(--serif-en);
+    font-size: clamp(22px, 5vw, 32px);
+    letter-spacing: 0.08em;
+    color: var(--white);
+  }
+  .index-row .label small{
+    display:block;
+    font-family: var(--serif-jp);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--white-dim);
+    margin-top: 6px;
+  }
+  .index-row .arrow{
+    width: 42px; height: 42px;
+    flex-shrink: 0;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    transition: all .3s ease;
+  }
+  .index-row:hover .arrow{ background: var(--gold); color: var(--black); transform: translateX(4px); }
+
+  /* ===== Section shell ===== */
+  .section{ padding: 110px 0; }
+  .section-head{ text-align: center; margin-bottom: 64px; }
+  .section-head h3{
+    font-family: var(--serif-en);
+    font-size: clamp(30px, 6vw, 46px);
+    letter-spacing: 0.1em;
+    color: var(--white);
+    margin: 16px 0 14px;
+  }
+  .section-head p{
+    font-family: var(--serif-jp);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    color: var(--white-dim);
+  }
+  .section-head .eyebrow{ justify-content: center; }
+  .section-head .eyebrow::after{ content:""; width:26px; height:1px; background: var(--gold); }
+
+  /* ===== Concept ===== */
+  .concept{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .concept-visual{
+    aspect-ratio: 4/5;
+    border: 1px solid var(--line);
+    position: relative;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(201,166,104,0.18), transparent 55%),
+      radial-gradient(circle at 80% 80%, rgba(122,20,32,0.35), transparent 55%),
+      linear-gradient(160deg, #1a1414, #0a0808);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .concept-visual .pin-mark{ width: 96px; height: 96px; opacity: 0.85; }
+  .concept-visual::before, .concept-visual::after{
+    content:"";
+    position:absolute;
+    width: 34px; height: 34px;
+    border: 1px solid var(--gold);
+  }
+  .concept-visual::before{ top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .concept-visual::after{ bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+  .concept-text p{
+    font-size: 15px;
+    color: var(--white-dim);
+    margin-bottom: 18px;
+  }
+  .concept-text p:last-of-type{ margin-bottom: 30px; }
+
+  /* ===== Menu cards ===== */
+  .menu-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .menu-card{
+    background: var(--black-2);
+    padding: 48px 32px;
+    text-align: center;
+    transition: background .35s ease;
+  }
+  .menu-card:hover{ background: var(--black-3); }
+  .menu-card .icon{
+    width: 46px; height: 46px;
+    margin: 0 auto 24px;
+    color: var(--gold);
+  }
+  .menu-card h4{
+    font-family: var(--serif-en);
+    letter-spacing: 0.15em;
+    font-size: 16px;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .menu-card .jp{
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .menu-card p{
+    font-size: 13px;
+    color: var(--white-dim);
+    margin-bottom: 20px;
+  }
+  .menu-card .price{
+    font-family: var(--serif-en-2);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--gold-soft);
+  }
+
+  /* ===== News / Schedule ===== */
+  .news{ background: var(--black-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .news-list{ border-top: 1px solid var(--line); }
+  .news-item{
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 24px;
+    padding: 26px 4px;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+  .news-item .tag-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .news-item .badge{
+    font-family: var(--serif-en);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    padding: 4px 10px;
+    background: var(--red-bright);
+    color: var(--white);
+  }
+  .news-item .date{
+    font-family: var(--serif-en);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+  }
+  .news-item .cat{
+    font-family: var(--serif-en);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--white-dim);
+    margin-bottom: 8px;
+    display:block;
+  }
+  .news-item h5{
+    font-family: var(--serif-jp);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--white);
+  }
+  .view-more{
+    display:flex; justify-content:flex-end; align-items:center; gap: 14px;
+    padding: 30px 4px 0;
+  }
+  .view-more span{
+    font-family: var(--serif-en);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--gold-soft);
+  }
+  .view-more .arrow{
+    width: 38px; height: 38px;
+    border: 1px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--gold);
+  }
+
+  /* ===== Gallery ===== */
+  .gallery-track{
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
+  }
+  .gallery-track::-webkit-scrollbar{ height: 4px; }
+  .gallery-track::-webkit-scrollbar-thumb{ background: var(--gold); }
+  .gallery-track::-webkit-scrollbar-track{ background: var(--black-2); }
+  .gallery-slide{
+    flex: 0 0 78%;
+    max-width: 420px;
+    aspect-ratio: 3/4;
+    scroll-snap-align: start;
+    position: relative;
+    display:flex; align-items:flex-end;
+    padding: 26px;
+    border: 1px solid var(--line);
+  }
+  .gallery-slide h6{
+    font-family: var(--serif-en);
+    letter-spacing: 0.15em;
+    font-size: 14px;
+    color: var(--white);
+    position: relative; z-index: 1;
+  }
+  .gallery-slide::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.55), transparent 55%);
+  }
+  .g1{ background: linear-gradient(160deg,#2a1013,#0a0808 70%), radial-gradient(circle at 70% 20%, rgba(201,166,104,0.25), transparent 60%); }
+  .g2{ background: linear-gradient(160deg,#171010,#0a0808 70%), radial-gradient(circle at 30% 70%, rgba(122,20,32,0.4), transparent 60%); }
+  .g3{ background: linear-gradient(160deg,#1c1512,#0a0808 70%), radial-gradient(circle at 60% 60%, rgba(201,166,104,0.3), transparent 60%); }
+  .g4{ background: linear-gradient(160deg,#140f0f,#0a0808 70%), radial-gradient(circle at 40% 30%, rgba(122,20,32,0.3), transparent 60%); }
+
+  /* ===== Access ===== */
+  .access{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--line);
+  }
+  .access-info{ padding: 56px 48px; background: var(--black-2); }
+  .access-info dl{ display: grid; grid-template-columns: 88px 1fr; row-gap: 22px; column-gap: 18px; margin-bottom: 36px; }
+  .access-info dt{
+    font-family: var(--serif-en);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    padding-top: 2px;
+  }
+  .access-info dd{ font-size: 14px; color: var(--white-dim); }
+  .access-map{
+    position: relative;
+    min-height: 320px;
+    background:
+      linear-gradient(rgba(201,166,104,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,166,104,0.08) 1px, transparent 1px),
+      var(--black-3);
+    background-size: 30px 30px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .access-map .pin-mark{ width: 54px; height: 54px; }
+
+  /* ===== Footer ===== */
+  footer{
+    padding: 80px 24px 40px;
+    text-align: center;
+    border-top: 1px solid var(--line);
+  }
+  footer .pin-mark{ width: 44px; height: 44px; margin: 0 auto 18px; }
+  footer .fbrand{
+    font-family: var(--serif-en);
+    letter-spacing: 0.3em;
+    font-size: 15px;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  footer .fsub{
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--white-dim);
+    margin-bottom: 34px;
+  }
+  .footer-links{
+    display:flex; justify-content:center; gap: 28px; flex-wrap:wrap;
+    margin-bottom: 34px;
+  }
+  .footer-links a{
+    font-family: var(--serif-en);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--white-dim);
+  }
+  .footer-links a:hover{ color: var(--gold); }
+  .social{ display:flex; justify-content:center; gap: 18px; margin-bottom: 34px; }
+  .social a{
+    width: 36px; height: 36px;
+    border: 1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--gold);
+    transition: all .3s ease;
+  }
+  .social a:hover{ border-color: var(--gold); background: rgba(201,166,104,0.08); }
+  footer .copyright{ font-family: var(--serif-en); font-size: 10px; letter-spacing: 0.1em; color: rgba(244,239,230,0.35); }
+
+  [data-reveal]{
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  [data-reveal].in{ opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 860px){
+    .concept{ grid-template-columns: 1fr; }
+    .menu-grid{ grid-template-columns: 1fr; }
+    .access{ grid-template-columns: 1fr; }
+    .news-item{ grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px){
+    .brand span.name{ display:none; }
+    .access-info{ padding: 40px 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header>
+  <a href="#top" class="brand">
+    <svg class="pin-mark" viewBox="0 0 48 48" fill="none"><path d="M24 4C14.6 4 7 11.6 7 21c0 12.3 15 21.6 16.2 22.3.5.3 1.1.3 1.6 0C26 42.6 41 33.3 41 21c0-9.4-7.6-17-17-17Z" stroke="#c9a668" stroke-width="1.6"/><circle cx="24" cy="21" r="7" stroke="#b31d2d" stroke-width="1.6"/></svg>
+    <span class="name">LE PIN<small>ROPPONGI LOUNGE</small></span>
+  </a>
+  <label class="menu-btn" for="menu-toggle">
+    <span class="bars"><span></span><span></span><span></span></span>
+    MENU
+  </label>
+</header>
+
+<input type="checkbox" id="menu-toggle">
+<div class="nav-overlay">
+  <label class="nav-close" for="menu-toggle">CLOSE ✕</label>
+  <nav>
+    <a href="#concept"><label for="menu-toggle" style="cursor:pointer;display:block;">CONCEPT<span>コンセプト</span></label></a>
+    <a href="#menu"><label for="menu-toggle" style="cursor:pointer;display:block;">MENU<span>メニュー</span></label></a>
+    <a href="#news"><label for="menu-toggle" style="cursor:pointer;display:block;">NEWS<span>お知らせ</span></label></a>
+    <a href="#gallery"><label for="menu-toggle" style="cursor:pointer;display:block;">GALLERY<span>ギャラリー</span></label></a>
+    <a href="#access"><label for="menu-toggle" style="cursor:pointer;display:block;">ACCESS<span>アクセス</span></label></a>
+    <a href="#reserve"><label for="menu-toggle" style="cursor:pointer;display:block;">RESERVE<span>ご予約</span></label></a>
+  </nav>
+</div>
+
+<!-- ===== Hero ===== -->
+<div id="top" class="hero">
+  <svg class="hero-mark" viewBox="0 0 48 48" fill="none"><path d="M24 4C14.6 4 7 11.6 7 21c0 12.3 15 21.6 16.2 22.3.5.3 1.1.3 1.6 0C26 42.6 41 33.3 41 21c0-9.4-7.6-17-17-17Z" stroke="#c9a668" stroke-width="1.4"/><circle cx="24" cy="21" r="7" stroke="#b31d2d" stroke-width="1.4"/></svg>
+  <div class="eyebrow">ROPPONGI PREMIUM LOUNGE</div>
+  <h1>LE PIN</h1>
+  <h2>六 本 木 ラ ウ ン ジ</h2>
+  <p class="tagline">— 煌めく夜に、極上のひとときを —</p>
+  <div class="hero-actions">
+    <a href="#reserve" class="btn solid">ご予約 / RESERVE</a>
+    <a href="#menu" class="btn">MENU を見る</a>
+  </div>
+  <div class="scroll-cue"><span>SCROLL</span><span class="line"></span></div>
+</div>
+
+<!-- ===== Index Links ===== -->
+<div class="index-list">
+  <a class="index-row" href="#concept" data-reveal>
+    <span class="num">01</span>
+    <span class="label">CONCEPT<small>コンセプト</small></span>
+    <span class="arrow">→</span>
+  </a>
+  <a class="index-row" href="#menu" data-reveal>
+    <span class="num">02</span>
+    <span class="label">MENU<small>メニュー</small></span>
+    <span class="arrow">→</span>
+  </a>
+  <a class="index-row" href="#gallery" data-reveal>
+    <span class="num">03</span>
+    <span class="label">GALLERY<small>ギャラリー</small></span>
+    <span class="arrow">→</span>
+  </a>
+  <a class="index-row" href="#access" data-reveal>
+    <span class="num">04</span>
+    <span class="label">ACCESS<small>アクセス</small></span>
+    <span class="arrow">→</span>
+  </a>
+</div>
+
+<!-- ===== Concept ===== -->
+<section id="concept" class="section">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">CONCEPT</div>
+      <h3>The Art of the Night</h3>
+      <p>夜という時間を、最上級の体験へ。</p>
+    </div>
+    <div class="concept">
+      <div class="concept-visual" data-reveal>
+        <svg class="pin-mark" viewBox="0 0 48 48" fill="none"><path d="M24 4C14.6 4 7 11.6 7 21c0 12.3 15 21.6 16.2 22.3.5.3 1.1.3 1.6 0C26 42.6 41 33.3 41 21c0-9.4-7.6-17-17-17Z" stroke="#c9a668" stroke-width="1"/><circle cx="24" cy="21" r="7" stroke="#b31d2d" stroke-width="1"/></svg>
+      </div>
+      <div class="concept-text" data-reveal>
+        <div class="rule" style="margin-bottom:26px; width:64px;"></div>
+        <p>
+          六本木の喧騒から一歩離れた、静謐な空間 ── LE PIN。
+          黒と金、そして深紅がゆらめく光の中で、一杯の酒が特別な物語へと変わります。
+        </p>
+        <p>
+          厳選されたシャンパーニュ、腕利きバーテンダーが仕上げるクラフトカクテル、
+          そして行き届いたホスピタリティ。すべてが「上質な夜」のためにあります。
+        </p>
+        <p>
+          少人数制の個室からカウンター席まで、あらゆるシーンに寄り添う空間をご用意し、
+          大切な人との時間を、より特別なものへと導きます。
+        </p>
+        <a href="#reserve" class="btn">ご予約はこちら</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ===== Menu ===== -->
+<section id="menu" class="section">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">MENU</div>
+      <h3>Selected for You</h3>
+      <p>厳選された一杯、一皿を。</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="menu-grid" data-reveal>
+      <div class="menu-card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none"><path d="M16 6h16l-2 20a6 6 0 0 1-12 0L16 6Z" stroke="#c9a668" stroke-width="1.4"/><path d="M24 26v16M17 42h14" stroke="#c9a668" stroke-width="1.4"/></svg>
+        <h4>CHAMPAGNE &amp; WINE</h4>
+        <div class="jp">シャンパン &amp; ワイン</div>
+        <p>世界各地より届く、名門メゾンのシャンパーニュと厳選ワイン。</p>
+        <div class="price">FROM ¥3,500</div>
+      </div>
+      <div class="menu-card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none"><path d="M10 8h28l-12 18v14h-4V26L10 8Z" stroke="#c9a668" stroke-width="1.4"/><path d="M17 42h14" stroke="#c9a668" stroke-width="1.4"/></svg>
+        <h4>CRAFT COCKTAIL</h4>
+        <div class="jp">クラフトカクテル</div>
+        <p>季節の素材を用いた、バーテンダー特製のオリジナルカクテル。</p>
+        <div class="price">FROM ¥2,800</div>
+      </div>
+      <div class="menu-card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="17" stroke="#c9a668" stroke-width="1.4"/><path d="M24 15v9l7 4" stroke="#c9a668" stroke-width="1.4"/></svg>
+        <h4>PREMIUM DINING</h4>
+        <div class="jp">プレミアムダイニング</div>
+        <p>お酒に寄り添う、シェフ厳選の一皿をコースでもアラカルトでも。</p>
+        <div class="price">FROM ¥4,200</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== News ===== -->
+<section id="news" class="news">
+  <div class="section wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">NEWS</div>
+      <h3>Latest Information</h3>
+      <p>最新情報・スケジュール</p>
+    </div>
+    <div class="news-list" data-reveal>
+      <div class="news-item">
+        <div class="tag-row"><span class="badge">NEW</span><span class="date">2026.08.10</span></div>
+        <div>
+          <span class="cat">EVENT</span>
+          <h5>サマーナイト・シャンパンフェア開催のお知らせ</h5>
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="tag-row"><span class="badge">NEW</span><span class="date">2026.08.01</span></div>
+        <div>
+          <span class="cat">INFORMATION</span>
+          <h5>夏季営業時間変更のご案内</h5>
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="tag-row"><span class="date">2026.07.15</span></div>
+        <div>
+          <span class="cat">MEDIA</span>
+          <h5>雑誌「NIGHT LUXE」にLE PINが掲載されました</h5>
+        </div>
+      </div>
+    </div>
+    <div class="view-more">
+      <span>VIEW MORE</span>
+      <span class="arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Gallery ===== -->
+<section id="gallery" class="section">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">GALLERY</div>
+      <h3>Inside LE PIN</h3>
+      <p>洗練された空間美。</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="gallery-track" data-reveal>
+      <div class="gallery-slide g1"><h6>THE COUNTER</h6></div>
+      <div class="gallery-slide g2"><h6>PRIVATE ROOM</h6></div>
+      <div class="gallery-slide g3"><h6>LOUNGE SOFA</h6></div>
+      <div class="gallery-slide g4"><h6>NIGHT VIEW</h6></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ===== Access ===== -->
+<section id="access" class="section">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">ACCESS</div>
+      <h3>Find Us</h3>
+      <p>六本木の中心、極上の隠れ家へ。</p>
+    </div>
+    <div class="access" data-reveal>
+      <div class="access-info">
+        <dl>
+          <dt>ADDRESS</dt>
+          <dd>〒106-0032<br>東京都港区六本木 X-X-X<br>LE PIN Bldg. 8F</dd>
+          <dt>ACCESS</dt>
+          <dd>東京メトロ日比谷線・都営大江戸線<br>「六本木」駅より徒歩3分</dd>
+          <dt>HOURS</dt>
+          <dd>20:00 - 翌 3:00 (L.O. 2:30)<br>日曜定休 ／ 完全予約制</dd>
+          <dt>TEL</dt>
+          <dd>03-XXXX-XXXX</dd>
+        </dl>
+        <a href="#reserve" id="reserve" class="btn solid">ご予約・お問い合わせ</a>
+      </div>
+      <div class="access-map">
+        <svg class="pin-mark" viewBox="0 0 48 48" fill="none"><path d="M24 4C14.6 4 7 11.6 7 21c0 12.3 15 21.6 16.2 22.3.5.3 1.1.3 1.6 0C26 42.6 41 33.3 41 21c0-9.4-7.6-17-17-17Z" stroke="#c9a668" stroke-width="1.4"/><circle cx="24" cy="21" r="7" stroke="#b31d2d" stroke-width="1.4"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <svg class="pin-mark" viewBox="0 0 48 48" fill="none"><path d="M24 4C14.6 4 7 11.6 7 21c0 12.3 15 21.6 16.2 22.3.5.3 1.1.3 1.6 0C26 42.6 41 33.3 41 21c0-9.4-7.6-17-17-17Z" stroke="#c9a668" stroke-width="1.2"/><circle cx="24" cy="21" r="7" stroke="#b31d2d" stroke-width="1.2"/></svg>
+  <div class="fbrand">LE PIN</div>
+  <div class="fsub">ROPPONGI PREMIUM LOUNGE</div>
+  <div class="footer-links">
+    <a href="#concept">CONCEPT</a>
+    <a href="#menu">MENU</a>
+    <a href="#news">NEWS</a>
+    <a href="#gallery">GALLERY</a>
+    <a href="#access">ACCESS</a>
+  </div>
+  <div class="social">
+    <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
+    <a href="#" aria-label="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 3l18 18M21 3L3 21" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    <a href="#" aria-label="Line"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="14" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M6 20l3-2" stroke="currentColor" stroke-width="1.4"/></svg></a>
+  </div>
+  <div class="copyright">© 2026 LE PIN ROPPONGI. ALL RIGHTS RESERVED.</div>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  items.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
