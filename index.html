@@ -821,6 +821,30 @@
   .sns-embed :where(.tiktok-embed){
     max-width:100%;
   }
+  .sns-embed :where(.instagram-media){
+    border:none !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    margin:0 !important;
+    width:100% !important;
+    max-width:340px !important;
+    min-width:0 !important;
+  }
+  .ig-fallback{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:14px;
+    padding:20px 6px;
+  }
+  .ig-fallback svg{width:36px;height:36px;color:var(--gold);}
+  .ig-fallback-name{
+    font-family:var(--serif);
+    font-size:16px;
+    letter-spacing:.05em;
+    color:var(--gold-pale);
+  }
   /* ===== Gallery ===== */
   .gallery-card{
     flex:0 0 auto;
@@ -1318,9 +1342,11 @@
         </div>
 
         <div class="sns-embed">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DaiAtnspfY1/" data-instgrm-version="14" style="width:100%; max-width:400px;">
-            <div style="padding:16px;">
-              <a href="https://www.instagram.com/reel/DaiAtnspfY1/" target="_blank" rel="noopener">Instagramでこの投稿を見る</a>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DaiAtnspfY1/" data-instgrm-version="14">
+            <div class="ig-fallback">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg>
+              <div class="ig-fallback-name">@lepin_roppongi</div>
+              <a href="https://www.instagram.com/reel/DaiAtnspfY1/" target="_blank" rel="noopener" class="btn btn-outline">Instagramでこの投稿を見る</a>
             </div>
           </blockquote>
         </div>
