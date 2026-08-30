@@ -19,6 +19,11 @@
     --bg:#0a0710;
     --bg-alt:#130b1d;
     --bg-card:#170f22;
+    --card-bg:
+      radial-gradient(130% 110% at 8% 4%, rgba(243,236,240,0.10), transparent 52%),
+      radial-gradient(140% 130% at 100% 100%, rgba(156,31,63,0.42), transparent 62%),
+      radial-gradient(90% 90% at 90% 6%, rgba(226,183,138,0.07), transparent 55%),
+      var(--bg-card);
     --line: rgba(201,162,90,0.28);
     --line-strong: rgba(201,162,90,0.55);
     --wine:#9c1f3f;
@@ -244,12 +249,6 @@
     .section > .wrap{padding-left:54px;}
   }
 
-  .eyebrow{
-    font-size:12px;
-    letter-spacing:.35em;
-    color:var(--gold);
-    margin-bottom:18px;
-  }
   h2.head{
     font-family:var(--serif);
     font-weight:500;
@@ -422,7 +421,7 @@
     margin-top:46px;
   }
   .about-card{
-    background:var(--bg-card);
+    background:var(--card-bg);
     padding:34px 28px;
   }
   .about-card .num{
@@ -582,7 +581,7 @@
   .access-box{
     border:1px solid var(--line);
     padding:28px 26px;
-    background:var(--bg-card);
+    background:var(--card-bg);
   }
   .access-box h3{
     font-family:var(--serif-jp);
@@ -673,7 +672,7 @@
     max-width:320px;
     scroll-snap-align:center;
     border:1px solid var(--line);
-    background:var(--bg-card);
+    background:var(--card-bg);
     padding:30px 26px;
   }
   .group-card .tag{
@@ -957,7 +956,6 @@
   <section class="section" id="about">
     <div class="v-label"><span class="en">ABOUT</span><span class="jp">概要</span></div>
     <div class="wrap">
-      <div class="eyebrow fade-up">ABOUT</div>
       <h2 class="head fade-up">長年培われた信頼と<br>品格を、六本木で。</h2>
       <p class="lead-text fade-up">
         六本木の会員制ラウンジ LEPIN は、25年以上にわたり多くのお客様に愛されてきました。
@@ -988,7 +986,6 @@
   <section class="section" id="event">
     <div class="v-label"><span class="en">EVENT</span><span class="jp">最新情報</span></div>
     <div class="wrap">
-      <div class="eyebrow fade-up">EVENT</div>
       <h2 class="head fade-up">最新情報・イベント情報</h2>
       <p class="lead-text fade-up">季節の特別な夜にも、LEPINらしい上質なおもてなしでお迎えいたします。</p>
 
@@ -1023,7 +1020,6 @@
   <section class="section" id="system">
     <div class="v-label"><span class="en">SYSTEM</span><span class="jp">料金システム</span></div>
     <div class="wrap">
-      <div class="eyebrow fade-up">SYSTEM</div>
       <h2 class="head fade-up">料金システム</h2>
       <p class="lead-text fade-up">ご予約・お問い合わせはお電話またはメールにてお願いいたします。</p>
 
@@ -1052,7 +1048,6 @@
   <section class="section" id="menu">
     <div class="v-label"><span class="en">MENU</span><span class="jp">ハウスボトル</span></div>
     <div class="wrap">
-      <div class="eyebrow fade-up">MENU</div>
       <h2 class="head fade-up">ハウスボトル</h2>
       <p class="lead-text fade-up">銘柄は予告なく変更になる場合があります。</p>
 
@@ -1091,7 +1086,6 @@
   <section class="section" id="access">
     <div class="v-label"><span class="en">ACCESS</span><span class="jp">アクセス</span></div>
     <div class="wrap">
-      <div class="eyebrow fade-up">ACCESS</div>
       <h2 class="head fade-up">六本木駅から徒歩3分</h2>
       <p class="access-address fade-up">
         LE PIN roppongi<br>
@@ -1122,7 +1116,6 @@
   <section class="section" id="group">
     <div class="v-label"><span class="en">GROUP</span><span class="jp">系列店</span></div>
     <div class="wrap">
-      <div class="eyebrow fade-up">GROUP</div>
       <h2 class="head fade-up">系列店のご案内</h2>
       <p class="lead-text fade-up">LEPINは六本木を中心に、全国各地で系列店を展開しております。あわせてご利用くださいませ。</p>
 
@@ -1139,7 +1132,6 @@
   <section class="section" id="recruit">
     <div class="v-label"><span class="en">RECRUIT</span><span class="jp">採用</span></div>
     <div class="wrap">
-      <div class="eyebrow fade-up">RECRUIT</div>
       <h2 class="head fade-up">採用に関するお問い合わせ</h2>
       <p class="lead-text fade-up">女性キャスト・スタッフ募集。送信するとメールアプリが開き、採用担当宛に内容が入った状態で作成されます。</p>
 
