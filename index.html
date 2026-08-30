@@ -803,6 +803,48 @@
     line-height:1.9;
   }
 
+  /* ===== SNS ===== */
+  .sns-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:32px;
+    margin-top:44px;
+    align-items:start;
+  }
+  .sns-embed{
+    border:1px solid var(--line);
+    background:var(--card-bg);
+    padding:26px;
+    display:flex;
+    justify-content:center;
+  }
+  .sns-embed :where(.tiktok-embed){
+    max-width:100%;
+  }
+  .ig-card{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:14px;
+    padding:44px 26px;
+  }
+  .ig-icon{
+    width:40px;height:40px;
+    color:var(--gold);
+    margin-bottom:6px;
+  }
+  .ig-name{
+    font-family:var(--serif);
+    font-size:18px;
+    letter-spacing:.05em;
+    color:var(--gold-pale);
+  }
+  .ig-card p{
+    font-size:13.5px;
+    color:var(--text-dim);
+    margin:0 0 8px;
+  }
+
   /* ===== Gallery ===== */
   .gallery-card{
     flex:0 0 auto;
@@ -1038,7 +1080,8 @@
       <li><a href="#menu" class="nav-link"><span><span class="num">05</span>MENU</span><span class="arrow">→</span></a></li>
       <li><a href="#access" class="nav-link"><span><span class="num">06</span>ACCESS</span><span class="arrow">→</span></a></li>
       <li><a href="#group" class="nav-link"><span><span class="num">07</span>GROUP</span><span class="arrow">→</span></a></li>
-      <li><a href="#recruit" class="nav-link"><span><span class="num">08</span>RECRUIT</span><span class="arrow">→</span></a></li>
+      <li><a href="#sns" class="nav-link"><span><span class="num">08</span>SNS</span><span class="arrow">→</span></a></li>
+      <li><a href="#recruit" class="nav-link"><span><span class="num">09</span>RECRUIT</span><span class="arrow">→</span></a></li>
     </ul>
     <div class="nav-label">RESERVATION</div>
     <div class="nav-sub">
@@ -1282,6 +1325,33 @@
     </div>
   </section>
 
+  <!-- ===== SNS ===== -->
+  <section class="section" id="sns">
+    <div class="v-label"><span class="en">SNS</span><span class="jp">最新情報</span></div>
+    <div class="wrap">
+      <h2 class="head fade-up">SNSで最新情報をチェック</h2>
+      <p class="lead-text fade-up">TikTok・Instagramでも店内の様子や最新情報を発信しています。</p>
+
+      <div class="sns-grid fade-up">
+        <div class="sns-embed">
+          <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@lepin.roppongi" data-unique-id="lepin.roppongi" data-embed-type="creator" style="max-width: 780px; min-width: 288px;">
+            <section>
+              <a target="_blank" href="https://www.tiktok.com/@lepin.roppongi?refer=creator_embed">@lepin.roppongi</a>
+            </section>
+          </blockquote>
+        </div>
+
+        <div class="sns-embed ig-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" class="ig-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg>
+          <div class="ig-name">@lepin_roppongi</div>
+          <p>最新の投稿はInstagramでご覧いただけます。</p>
+          <a href="https://www.instagram.com/lepin_roppongi" target="_blank" rel="noopener" class="btn btn-outline">Instagramを見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script async src="https://www.tiktok.com/embed.js"></script>
+
   <!-- ===== Recruit ===== -->
   <section class="section" id="recruit">
     <div class="v-label"><span class="en">RECRUIT</span><span class="jp">採用</span></div>
@@ -1356,6 +1426,7 @@
           <li><a href="#system">SYSTEM<span>→</span></a></li>
           <li><a href="#access">ACCESS<span>→</span></a></li>
           <li><a href="#group">GROUP<span>→</span></a></li>
+          <li><a href="#sns">SNS<span>→</span></a></li>
           <li><a href="#recruit">RECRUIT<span>→</span></a></li>
         </ul>
       </div>
