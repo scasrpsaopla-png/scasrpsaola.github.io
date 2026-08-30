@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<script>document.documentElement.classList.add('js-ready');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>六本木LEPIN（ルパン）| 会員制ラウンジ</title>
@@ -269,12 +270,13 @@
     margin-top:20px;
   }
 
-  .fade-up{
+  /* Content stays visible by default; only hidden/animated once JS confirms it can reveal it again */
+  html.js-ready .fade-up{
     opacity:0;
     transform:translateY(28px);
     transition:opacity .9s ease, transform .9s ease;
   }
-  .fade-up.in{opacity:1;transform:translateY(0);}
+  html.js-ready .fade-up.in{opacity:1;transform:translateY(0);}
 
   /* ===== Hero ===== */
   .hero{
