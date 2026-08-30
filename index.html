@@ -399,17 +399,19 @@
     padding:0 24px 100px;
   }
   .stamp{
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    padding:26px 20px;
+    background:linear-gradient(135deg, #8a1a34, #5c0f22);
+    border-top:1px solid var(--line-strong);
+    border-bottom:1px solid var(--line-strong);
+    padding:28px 24px;
     text-align:center;
     max-width:420px;
+    box-shadow:0 12px 28px rgba(92,15,34,0.4);
   }
   .stamp .tag{
     font-family:var(--serif-jp);
     font-size:14.5px;
     letter-spacing:.08em;
-    color:var(--text-dim);
+    color:var(--gold-pale);
   }
 
   /* ===== About cards ===== */
@@ -493,7 +495,10 @@
   }
   .table-heading:first-of-type{margin-top:40px;}
   .system-table{
-    border-top:1px solid var(--line);
+    background:#f7f0e3;
+    border-radius:6px;
+    padding:4px 24px;
+    box-shadow:0 12px 26px rgba(0,0,0,0.35);
   }
   .system-row{
     display:grid;
@@ -501,16 +506,18 @@
     align-items:baseline;
     gap:24px;
     padding:20px 0;
-    border-bottom:1px solid var(--line);
+    border-bottom:1px solid rgba(90,60,40,0.16);
   }
+  .system-row:last-child{border-bottom:none;}
   .system-row dt{
     font-size:14.5px;
-    color:var(--text);
+    color:#3a2418;
   }
   .system-row dd{
     margin:0;
-    color:var(--gold-pale);
+    color:#8a2d42;
     font-family:var(--serif);
+    font-weight:600;
     font-size:19px;
     white-space:nowrap;
   }
@@ -552,14 +559,16 @@
   .bottle-list{
     list-style:none;
     margin:0 0 8px;
-    padding:0;
-    border-top:1px solid var(--line);
+    padding:4px 20px;
+    background:#f7f0e3;
+    border-radius:6px;
+    box-shadow:0 12px 26px rgba(0,0,0,0.3);
   }
   .bottle-list li{
     padding:14px 2px;
-    border-bottom:1px solid var(--line);
+    border-bottom:1px solid rgba(90,60,40,0.16);
     font-size:14.5px;
-    color:var(--text-dim);
+    color:#3a2418;
   }
   .bottle-list li:last-child{border-bottom:none;}
 
@@ -608,11 +617,41 @@
   .map-frame iframe{width:100%;height:100%;border:0;display:block;}
 
   /* ===== Group tabs + carousel ===== */
+  .scroll-hint{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:44px;
+  }
+  .scroll-hint span:first-child{
+    font-family:var(--serif-jp);
+    font-size:13.5px;
+    letter-spacing:.1em;
+    color:var(--text-dim);
+  }
+  .hint-arrows{
+    display:flex;
+    gap:1px;
+  }
+  .hint-arrows span{
+    color:var(--gold);
+    font-size:11px;
+    animation:hintPulse 1.4s ease-in-out infinite;
+  }
+  .hint-arrows span:nth-child(2){animation-delay:.15s;}
+  .hint-arrows span:nth-child(3){animation-delay:.3s;}
+  @keyframes hintPulse{
+    0%,100%{opacity:.25; transform:translateX(0);}
+    50%{opacity:1; transform:translateX(4px);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hint-arrows span{animation:none;}
+  }
   .group-tabs{
     display:flex;
     gap:10px;
     overflow-x:auto;
-    margin-top:44px;
+    margin-top:18px;
     padding-bottom:6px;
     scrollbar-width:none;
   }
@@ -912,6 +951,15 @@
     color:var(--text-faint);
     letter-spacing:.05em;
   }
+  .watermark-wrap{
+    overflow:hidden;
+    width:100%;
+  }
+  .watermark-track{
+    display:flex;
+    width:max-content;
+    animation:marquee 24s linear infinite;
+  }
   .watermark{
     font-family:var(--serif);
     font-weight:600;
@@ -921,9 +969,16 @@
     white-space:nowrap;
     letter-spacing:.02em;
     line-height:1;
-    text-align:center;
     padding:0 0 10px;
     user-select:none;
+    flex:none;
+  }
+  @keyframes marquee{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .watermark-track{animation:none;}
   }
 
   @media (max-width:600px){
@@ -1184,6 +1239,10 @@
       <h2 class="head fade-up">系列店のご案内</h2>
       <p class="lead-text fade-up">LEPINは六本木を中心に、全国各地で系列店を展開しております。あわせてご利用くださいませ。</p>
 
+      <div class="scroll-hint fade-up">
+        <span>六本木から沖縄まで。</span>
+        <span class="hint-arrows" aria-hidden="true"><span>❯</span><span>❯</span><span>❯</span></span>
+      </div>
       <div class="group-tabs fade-up" id="groupTabs" role="tablist"></div>
       <div id="groupPanels"></div>
 
@@ -1279,7 +1338,12 @@
       </div>
     </div>
 
-    <div class="watermark">LEPIN&nbsp;LEPIN&nbsp;LEPIN</div>
+    <div class="watermark-wrap">
+      <div class="watermark-track">
+        <span class="watermark">LEPIN&nbsp;LEPIN&nbsp;LEPIN&nbsp;LEPIN</span>
+        <span class="watermark" aria-hidden="true">LEPIN&nbsp;LEPIN&nbsp;LEPIN&nbsp;LEPIN</span>
+      </div>
+    </div>
 
     <div class="footer-bottom">
       <span>© 2026 LEPIN. All Rights Reserved.</span>
